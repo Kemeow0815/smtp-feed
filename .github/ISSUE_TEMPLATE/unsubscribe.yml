@@ -1,5 +1,5 @@
 name: 退订博客更新
-about: 提交您的邮箱退订博客文章更新通知
+description: 提交您的邮箱退订博客文章更新通知
 title: "[Unsubscribe] "
 labels: ["unsubscribe"]
 body:

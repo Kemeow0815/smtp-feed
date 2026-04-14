@@ -1,5 +1,5 @@
 name: 订阅博客更新
-about: 提交您的邮箱订阅博客文章更新通知
+description: 提交您的邮箱订阅博客文章更新通知
 title: "[Subscribe] "
 labels: ["subscribe"]
 body:
