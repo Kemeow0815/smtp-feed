@@ -1,0 +1,50 @@
+name: RSS Feed Check and Notify
+
+on:
+  schedule:
+    - cron: '0 */6 * * *'
+  workflow_dispatch:
+
+jobs:
+  check-rss:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      issues: read
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install feedparser requests
+
+      - name: Run RSS check and notify
+        env:
+          RSS_URL: ${{ secrets.RSS_URL }}
+          SMTP_HOST: ${{ secrets.SMTP_HOST }}
+          SMTP_PORT: ${{ secrets.SMTP_PORT }}
+          SMTP_USER: ${{ secrets.SMTP_USER }}
+          SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
+          FROM_EMAIL: ${{ secrets.FROM_EMAIL }}
+          BLOG_NAME: ${{ secrets.BLOG_NAME }}
+          BLOG_URL: ${{ secrets.BLOG_URL }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO_OWNER: ${{ github.repository_owner }}
+          REPO_NAME: ${{ github.event.repository.name }}
+        run: python src/rss_notifier.py
+
+      - name: Commit changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add data/
+          git diff --staged --quiet || git commit -m "Update RSS feed data"
+          git push

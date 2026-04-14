@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>退订成功 - {{BLOG_NAME}}</title>
+    <style>
+        img {
+            display: none;
+        }
+
+        blockquote {
+            box-shadow: inset 3px 3px 6px #f4f4f4, inset -3px -3px 6px #dcdcdc;
+            margin: 10px 0;
+            padding: 10px;
+            border-left: 5px solid #b0b0b0;
+            border-radius: 10px;
+        }
+        pre,
+        blockquote,
+        blockquote p,
+        .twikoo-content p {
+            margin: 0
+        }
+
+        pre {
+            position: relative;
+            border-radius: 10px;
+            border: 1px solid #ddd;
+            overflow: auto;
+            padding: 30px 1em 1em;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            box-shadow: inset 3px 3px 6px #f4f4f4, inset -3px -3px 6px #dcdcdc;
+            white-space: pre-wrap;
+            word-wrap: break-word
+        }
+
+        code {
+            white-space: pre !important;
+        }
+
+        pre::-webkit-scrollbar {
+            display: none
+        }
+
+        pre::before {
+            content: '';
+            position: absolute;
+            top: 10px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: #ff5f56;
+            box-shadow: 20px 0 #ffbd2e, 40px 0 #27c93f;
+        }
+
+        ul,
+        .qmbox ol, .qmbox ul {
+            margin: 0;
+            padding: 0 0 0 15px;
+        }
+
+        .twikoo-main {
+            width:100%;
+            max-width:800px;
+            margin: 20px auto 0;
+            padding: 20px;
+            border-radius:12px;
+            border:#e0e0e0 1px solid;
+            overflow:hidden;
+            box-shadow:inset 5px 5px 10px #c1c6cd,inset -5px -5px 10px #fff;
+            box-sizing: border-box;
+        }
+
+        .twikoo-content {
+            display: flex;
+            border-radius: 10px;
+            border: 1px solid #ddd;
+            padding: 15px;
+            gap: 10px;
+            overflow: hidden;
+            box-sizing: border-box;
+            box-shadow: inset 3px 3px 6px #c1c6cd, inset -3px -3px 6px #fff;
+            flex-direction: column;
+        }
+
+        .twikoo-center {
+            text-align: center;
+        }
+
+        .twikoo-hr {
+            width: 320px;
+            border: 0;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .twikoo-link {
+            text-decoration: none;
+            color: #9c515b;
+        }
+        .twikoo-bold {
+            font-weight: 600;
+            color: #777;
+        }
+        .twikoo-footer-p {
+            text-align: center;
+            margin-top: 2rem;
+            display: block;
+            color: #b3b3b1;
+        }
+
+        .twikoo-footer-img {
+            display: block;
+            width: 2.8rem;
+            margin: 0 auto;
+            border-radius: 50%;
+        }
+
+        .twikoo-footer-hr {
+            width: 200px;
+            border: 0;
+            border-bottom: 1px solid #ccc;
+            margin: 10px auto;
+        }
+
+        .twikoo-footer-link {
+            text-align: center;
+            color: #9c515b;
+            margin-left: 5px;
+            text-decoration: none;
+        }
+
+        .twikoo-chakan {
+            text-align: center;
+        }
+
+        .twikoo-chakan a:hover {
+            box-shadow: inset 3px 3px 6px #c1c6cd, inset -3px -3px 6px #fff !important
+        }
+
+        .twikoo-chakan a {
+            color: #9c515b;
+            text-decoration: none;
+            padding: 10px 15px;
+            font-size: 13px;
+            border-radius: 10px;
+            box-shadow: inset 3px 3px 6px #f4f4f4, inset -3px -3px 6px #dcdcdc;
+            transition: all .3s ease-in-out;
+        }
+
+        .success-icon {
+            font-size: 48px;
+            margin: 20px 0;
+            color: #27c93f;
+        }
+
+        .info-box {
+            background: #f0f9f0;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 15px 0;
+            border-left: 4px solid #27c93f;
+        }
+
+        .resubscribe-link {
+            font-size: 12px;
+            color: #999;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .resubscribe-link a {
+            color: #9c515b;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="twikoo-main">
+        <center>
+            <div class="success-icon">✓</div>
+            <h3 style="color: #27c93f;">退订成功</h3>
+        </center>
+        <hr class="twikoo-hr">
+        
+        <p class="twikoo-bold">您好!</p>
+        
+        <p>您的邮箱已成功从 <a class="twikoo-link" href="{{BLOG_URL}}">{{BLOG_NAME}}</a> 的订阅列表中移除。</p>
+        
+        <div class="info-box">
+            <p style="margin: 0;"><strong>退订邮箱:</strong> {{EMAIL}}</p>
+            <p style="margin: 10px 0 0 0;"><strong>退订时间:</strong> {{UNSUBSCRIBE_TIME}}</p>
+        </div>
+        
+        <p>您将不再收到博客更新通知。</p>
+        <p>如需重新订阅，可随时提交新的订阅请求。</p>
+        
+        <br>
+        
+        <div class="twikoo-chakan">
+            <a href="{{BLOG_URL}}" target="_blank">访问博客 &gt;&gt;</a>
+        </div>
+        
+        <div class="twikoo-footer-p">
+            <hr class="twikoo-footer-hr">
+            © 2026 <a href="{{BLOG_URL}}" class="twikoo-footer-link" target="_blank">{{BLOG_NAME}}</a>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,27 @@
+name: 退订博客更新
+about: 提交您的邮箱退订博客文章更新通知
+title: "[Unsubscribe] "
+labels: ["unsubscribe"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## 退订博客更新通知
+        请输入您要退订的邮箱地址，关闭此议题后将从订阅列表中移除。
+  
+  - type: input
+    id: email
+    attributes:
+      label: 邮箱地址
+      description: 要退订的邮箱地址
+      placeholder: example@email.com
+    validations:
+      required: true
+  
+  - type: checkboxes
+    id: agreement
+    attributes:
+      label: 确认事项
+      options:
+        - label: 我确认要退订该邮箱的博客更新通知
+          required: true

@@ -1,0 +1,27 @@
+name: 订阅博客更新
+about: 提交您的邮箱订阅博客文章更新通知
+title: "[Subscribe] "
+labels: ["subscribe"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## 订阅博客更新通知
+        请输入您的邮箱地址，关闭此议题后将发送确认邮件。
+  
+  - type: input
+    id: email
+    attributes:
+      label: 邮箱地址
+      description: 用于接收博客更新通知的邮箱
+      placeholder: example@email.com
+    validations:
+      required: true
+  
+  - type: checkboxes
+    id: agreement
+    attributes:
+      label: 确认事项
+      options:
+        - label: 我确认提交的邮箱地址正确，并同意接收博客更新通知
+          required: true
