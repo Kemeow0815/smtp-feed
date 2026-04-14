@@ -8,6 +8,7 @@ import os
 import json
 import re
 import smtplib
+import base64
 from datetime import datetime
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
@@ -144,13 +145,32 @@ def render_error_email(email, error_message):
     '''
 
 
+def encode_header(text):
+    """对邮件头进行 RFC2047 编码"""
+    try:
+        # 如果全是 ASCII 字符，直接返回
+        text.encode('ascii')
+        return text
+    except UnicodeEncodeError:
+        # 包含非 ASCII 字符，使用 Base64 编码
+        encoded = base64.b64encode(text.encode('utf-8')).decode('ascii')
+        return f'=?UTF-8?B?{encoded}?='
+
+
 def send_email(to_email, subject, html_content):
     """发送邮件"""
     try:
         msg = MIMEMultipart('alternative')
+        
+        # 对主题进行编码
         msg['Subject'] = Header(subject, 'utf-8')
-        msg['From'] = Header(f"{BLOG_NAME} <{FROM_EMAIL}>", 'utf-8')
-        msg['To'] = Header(to_email, 'utf-8')
+        
+        # 对发件人名称进行 RFC2047 编码
+        encoded_name = encode_header(BLOG_NAME)
+        msg['From'] = f'{encoded_name} <{FROM_EMAIL}>'
+        
+        # 收件人
+        msg['To'] = to_email
         
         # 添加 HTML 内容
         html_part = MIMEText(html_content, 'html', 'utf-8')
