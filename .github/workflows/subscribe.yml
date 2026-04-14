@@ -6,7 +6,7 @@ on:
 
 jobs:
   process-subscription:
-    if: contains(github.event.issue.labels.*.name, 'subscribe')
+    if: github.event.issue.state == 'closed' && (contains(github.event.issue.labels.*.name, 'subscribe') || startsWith(github.event.issue.title, '[Subscribe]'))
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -34,7 +34,7 @@ jobs:
           FROM_EMAIL: ${{ secrets.FROM_EMAIL }}
           BLOG_NAME: ${{ secrets.BLOG_NAME }}
           BLOG_URL: ${{ secrets.BLOG_URL }}
-          GITHUB_REPO: ${{ github.repository }}
+          REPO_NAME: ${{ github.repository }}
           ISSUE_NUMBER: ${{ github.event.issue.number }}
           ISSUE_BODY: ${{ github.event.issue.body }}
           ISSUE_TITLE: ${{ github.event.issue.title }}

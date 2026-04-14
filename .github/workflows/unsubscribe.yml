@@ -6,7 +6,7 @@ on:
 
 jobs:
   process-unsubscribe:
-    if: contains(github.event.issue.labels.*.name, 'unsubscribe')
+    if: github.event.issue.state == 'closed' && (contains(github.event.issue.labels.*.name, 'unsubscribe') || startsWith(github.event.issue.title, '[Unsubscribe]'))
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -33,6 +33,7 @@ jobs:
           FROM_EMAIL: ${{ secrets.FROM_EMAIL }}
           BLOG_NAME: ${{ secrets.BLOG_NAME }}
           BLOG_URL: ${{ secrets.BLOG_URL }}
+          REPO_NAME: ${{ github.repository }}
           ISSUE_NUMBER: ${{ github.event.issue.number }}
           ISSUE_BODY: ${{ github.event.issue.body }}
           ISSUE_TITLE: ${{ github.event.issue.title }}

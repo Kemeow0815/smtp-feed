@@ -21,7 +21,7 @@ SMTP_PASSWORD = os.environ.get('SMTP_PASSWORD')
 FROM_EMAIL = os.environ.get('FROM_EMAIL')
 BLOG_NAME = os.environ.get('BLOG_NAME', '博客')
 BLOG_URL = os.environ.get('BLOG_URL', '')
-GITHUB_REPO = os.environ.get('GITHUB_REPO', '')
+REPO_NAME = os.environ.get('REPO_NAME', '')
 ISSUE_NUMBER = os.environ.get('ISSUE_NUMBER')
 ISSUE_BODY = os.environ.get('ISSUE_BODY', '')
 ISSUE_TITLE = os.environ.get('ISSUE_TITLE', '')
@@ -87,7 +87,7 @@ def render_welcome_email(email):
         html = template.replace('{{BLOG_NAME}}', BLOG_NAME)
         html = html.replace('{{BLOG_URL}}', BLOG_URL)
         html = html.replace('{{EMAIL}}', email)
-        html = html.replace('{{GITHUB_REPO}}', GITHUB_REPO)
+        html = html.replace('{{REPO_NAME}}', REPO_NAME)
         html = html.replace('{{SUBSCRIBE_TIME}}', datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
         return html
     else:
@@ -108,7 +108,7 @@ def render_welcome_email(email):
             </div>
             <br>
             <p style="font-size: 12px; color: #999;">
-                如不想继续接收通知，可<a href="https://github.com/{GITHUB_REPO}/issues/new?template=unsubscribe.yml">点击退订</a>
+                如不想继续接收通知，可<a href="https://github.com/{REPO_NAME}/issues/new?template=unsubscribe.yml">点击退订</a>
             </p>
             <div class="twikoo-footer-p">
                 <hr class="twikoo-footer-hr">
